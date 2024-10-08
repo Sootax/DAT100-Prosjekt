@@ -26,24 +26,40 @@ public class GPSUtils {
 
 		double min;
 
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
+		min = da[0];
+		
+		for (double d : da) {
+			if (d < min) {
+				min = d;
+			}
+		}
+		
+		return min;
 		
 	}
 
 	public static double[] getLatitudes(GPSPoint[] gpspoints) {
 
-		throw new UnsupportedOperationException(TODO.method());
+		double[] latitudes = new double[gpspoints.length];
+		int posisjon = 0;
 		
-		// TODO
+		for (GPSPoint gpspoint : gpspoints) {
+			latitudes[posisjon] = gpspoint.getLatitude();
+			posisjon++;
+		}
+		return latitudes;
 	}
 
 	public static double[] getLongitudes(GPSPoint[] gpspoints) {
 
+		double[] longitudes = new double[gpspoints.length];
+		int posisjon = 0;
 		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO 
+		for (GPSPoint gpspoint : gpspoints) {
+			longitudes[posisjon] = gpspoint.getLongitude();
+			posisjon++;
+		}
+		return longitudes;
 
 	}
 
