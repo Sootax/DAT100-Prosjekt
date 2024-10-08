@@ -48,9 +48,14 @@ public class GPSUtils {
 	public static double[] getLongitudes(GPSPoint[] gpspoints) {
 
 		
-		throw new UnsupportedOperationException(TODO.method());
+		double[] latitudes = new double[gpspoints.length];
+		int posisjon = 0;
 		
-		// TODO 
+		for (GPSPoint gpspoint : gpspoints) {
+			latitudes[posisjon] = gpspoint.getLatitude();
+			posisjon++;
+		}
+		return latitudes;
 
 	}
 
