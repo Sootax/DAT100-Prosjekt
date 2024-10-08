@@ -2,6 +2,7 @@ package no.hvl.dat100ptc.oppgave2;
 
 import no.hvl.dat100ptc.TODO;
 import no.hvl.dat100ptc.oppgave1.GPSPoint;
+import no.hvl.dat100ptc.oppgave2.GPSDataConverter;
 
 public class GPSData {
 	private GPSPoint[] gpspoints;
@@ -27,14 +28,9 @@ public class GPSData {
 	
 	}
 
-	public boolean insert(String time, String latitude, String longitude, String elevation) {
-
-		GPSPoint gpspoint;
-
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO 
-		
+	public boolean insert(String timeStr, String latitudeStr, String longitudeStr, String elevationStr) {
+		GPSPoint gpspoint = GPSDataConverter.convert(timeStr, latitudeStr, longitudeStr, elevationStr);
+		return insertGPS(gpspoint);
 	}
 
 	public void print() {
