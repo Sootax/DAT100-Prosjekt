@@ -8,11 +8,12 @@ public class GPSData {
 	private GPSPoint[] gpspoints;
 	protected int antall = 0;
 
-	public GPSData(int antall) {
+	public GPSData(int n) {
 
-		throw new UnsupportedOperationException(TODO.method());
+		GPSPoint[] GPS_tabell = new GPSPoint[n];
+		gpspoints = GPS_tabell;
+		antall = 0;
 		
-		// TODO
 	}
 
 	public GPSPoint[] getGPSPoints() {
@@ -20,12 +21,14 @@ public class GPSData {
 	}
 	
 	protected boolean insertGPS(GPSPoint gpspoint) {
-
-		boolean inserted = false;
 		
-		throw new UnsupportedOperationException(TODO.method());
+		if (antall < gpspoints.length) {
+			gpspoints[antall] = gpspoint;
+			antall++;
+			return true;
+		}
 		
-		// TODO 
+		return false;
 	
 	}
 
