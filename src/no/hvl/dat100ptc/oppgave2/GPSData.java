@@ -34,9 +34,13 @@ public class GPSData {
 	}
 
 	public void print() {
-
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO 
+		System.out.println("====== GPS Data - START ======");
+		for (int i = 0; i < gpspoints.length; i++) {
+			System.out.printf((i+1) + " (%.1f, %.1f) %.1f%n",
+					gpspoints[i].getLatitude(),
+					gpspoints[i].getLongitude(),
+					gpspoints[i].getElevation());
+		}
+		System.out.println("====== GPS Data - SLUTT ======");
 	}
 }
