@@ -52,7 +52,14 @@ public class GPSUtils {
 
 	public static double[] getLongitudes(GPSPoint[] gpspoints) {
 
+		double[] longitudes = new double[gpspoints.length];
+		int posisjon = 0;
 		
+		for (GPSPoint gpspoint : gpspoints) {
+			longitudes[posisjon] = gpspoint.getLongitude();
+			posisjon++;
+		}
+		return longitudes;
 
 	}
 
