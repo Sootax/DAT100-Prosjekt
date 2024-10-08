@@ -15,7 +15,6 @@ public class GPSPoint {
 		this.elevation = elevation;
 	}
 
-	// TODO - get/set metoder
 	public int getTime() {
 		return this.time;
 	}
