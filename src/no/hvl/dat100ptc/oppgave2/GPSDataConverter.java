@@ -14,9 +14,7 @@ public class GPSDataConverter {
 		hr = Integer.parseInt(timestr.substring(TIME_STARTINDEX, TIME_STARTINDEX+2));
 		min = Integer.parseInt(timestr.substring(TIME_STARTINDEX+3, TIME_STARTINDEX+5));
 		sec = Integer.parseInt(timestr.substring(TIME_STARTINDEX+6, TIME_STARTINDEX+8));
-		min += hr * 60;
-		sec += min * 60;
-		return sec;
+		return ((hr * 60) + min) * 60 + sec;
 	}
 
 	public static GPSPoint convert(String timeStr, String latitudeStr, String longitudeStr, String elevationStr) {
