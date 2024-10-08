@@ -9,7 +9,6 @@ public class GPSData {
 
 	public GPSData(int antall) {
 		this.gpspoints = new GPSPoint[antall];
-		this.antall = 0;
 	}
 
 	public GPSPoint[] getGPSPoints() {
