@@ -50,11 +50,11 @@ public class GPSPoint {
 	
 	public String toString() {
 		
-		String str;
+		String str = "";
 		
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO
+		str += getTime() + " (" + getLatitude() + "," + getLongitude() + ") " + getElevation() + "\n";
+		
+		return str;
 		
 	}
 }
