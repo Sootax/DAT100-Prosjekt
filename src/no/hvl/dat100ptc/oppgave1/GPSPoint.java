@@ -4,13 +4,9 @@ import no.hvl.dat100ptc.TODO;
 
 public class GPSPoint {
 
-	// Øyvind
-
 	// TODO - objektvariable
 	
 	public GPSPoint(int time, double latitude, double longitude, double elevation) {
-
-		// Øyvind
 
 		// TODO - konstruktur
 
