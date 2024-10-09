@@ -22,6 +22,7 @@ public class GPSUtils {
 		return max;
 	}
 
+	
 	public static double findMin(double[] da) {
 
 		double min;
@@ -38,6 +39,7 @@ public class GPSUtils {
 		
 	}
 
+	
 	public static double[] getLatitudes(GPSPoint[] gpspoints) {
 
 		double[] latitudes = new double[gpspoints.length];
@@ -50,6 +52,7 @@ public class GPSUtils {
 		return latitudes;
 	}
 
+	
 	public static double[] getLongitudes(GPSPoint[] gpspoints) {
 
 		double[] longitudes = new double[gpspoints.length];
@@ -63,6 +66,7 @@ public class GPSUtils {
 
 	}
 
+	
 	private static final int R = 6371000; // jordens radius
 
 	public static double distance(GPSPoint gpspoint1, GPSPoint gpspoint2) {
@@ -105,41 +109,65 @@ public class GPSUtils {
 		
 	}
 
-	// Torgeir jobber med denne
+	
 	public static double speed(GPSPoint gpspoint1, GPSPoint gpspoint2) {
 
 		int secs;
 		double speed;
 		
-		throw new UnsupportedOperationException(TODO.method());
+		secs = gpspoint2.getTime() - gpspoint1.getTime();
+		speed = distance(gpspoint1, gpspoint2) / secs;
 		
-		// TODO
-
+		return speed;
 	}
 	
-	// Torgeir jobber med denne
+	
 	public static String formatTime(int secs) {
-
-		String timestr;
-		String TIMESEP = ":";
-
-		throw new UnsupportedOperationException(TODO.method());
+				
+		int seconds = secs % 60;
+		int mins = (secs / 60) % 60;
+		int hours = secs / 3600;
 		
-		// TODO 
+		String timeStr = String.format("  %02d:%02d:%02d", hours, mins, seconds);
+		
+		return timeStr;		
 		
 	}
 	
-	// Torgeir jobber med denne
+	
 	private static int TEXTWIDTH = 10;
 
 	public static String formatDouble(double d) {
-
-		String str;
-
 		
-		throw new UnsupportedOperationException(TODO.method());
+		String numberFormatted = String.format("%.2f", d).replace(",", ".");
+		int numberLength = numberFormatted.length();
+		String strSpaces = ""; 
+	
 		
-		// TODO
+		for (int i = 0; i < TEXTWIDTH - numberLength; i++) {
+			
+			strSpaces += " ";
+			
+			}
+		
+		String strDouble = strSpaces + numberFormatted;
+
+		return strDouble;
 		
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
