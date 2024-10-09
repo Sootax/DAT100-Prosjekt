@@ -105,7 +105,7 @@ public class GPSUtils {
 		
 	}
 
-	
+	// Torgeir jobber med denne
 	public static double speed(GPSPoint gpspoint1, GPSPoint gpspoint2) {
 
 		int secs;
@@ -116,7 +116,8 @@ public class GPSUtils {
 		// TODO
 
 	}
-
+	
+	// Torgeir jobber med denne
 	public static String formatTime(int secs) {
 
 		String timestr;
@@ -128,6 +129,7 @@ public class GPSUtils {
 		
 	}
 	
+	// Torgeir jobber med denne
 	private static int TEXTWIDTH = 10;
 
 	public static String formatDouble(double d) {
