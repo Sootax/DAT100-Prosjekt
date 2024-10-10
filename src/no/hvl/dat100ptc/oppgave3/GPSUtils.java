@@ -96,17 +96,11 @@ public class GPSUtils {
 	}
 	
 	private static double compute_a(double phi1, double phi2, double deltaphi, double deltadelta) {
-		double a = pow(sin(deltaphi/2), 2) + cos(phi1) * cos(phi2) * pow((sin(deltadelta/2)), 2);
-		
-		return a;
+        return pow(sin(deltaphi/2), 2) + cos(phi1) * cos(phi2) * pow((sin(deltadelta/2)), 2);
 	}
 
 	private static double compute_c(double a) {
-		
-		double c = 2 * atan2(sqrt(a), sqrt(1-a));
-		
-		return c;
-		
+        return 2 * atan2(sqrt(a), sqrt(1-a));
 	}
 
 	
@@ -127,10 +121,8 @@ public class GPSUtils {
 		int seconds = secs % 60;
 		int mins = (secs / 60) % 60;
 		int hours = secs / 3600;
-		
-		String timeStr = String.format("  %02d:%02d:%02d", hours, mins, seconds);
-		
-		return timeStr;		
+
+        return String.format("  %02d:%02d:%02d", hours, mins, seconds);
 		
 	}
 	
@@ -141,7 +133,7 @@ public class GPSUtils {
 		
 		String numberFormatted = String.format("%.2f", d).replace(",", ".");
 		int numberLength = numberFormatted.length();
-		String strSpaces = ""; 
+		String strSpaces = "";
 	
 		
 		for (int i = 0; i < TEXTWIDTH - numberLength; i++) {
@@ -149,7 +141,7 @@ public class GPSUtils {
 			strSpaces += " ";
 			
 			}
-		
+
 		String strDouble = strSpaces + numberFormatted;
 
 		return strDouble;
