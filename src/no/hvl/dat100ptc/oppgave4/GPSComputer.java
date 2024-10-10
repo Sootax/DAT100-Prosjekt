@@ -15,7 +15,7 @@ public class GPSComputer {
 	public GPSComputer(String filename) {
 
 		GPSData gpsdata = GPSDataFileReader.readGPSFile(filename);
-		gpspoints = gpsdata.getGPSPoints();
+		this.gpspoints = gpsdata.getGPSPoints();
 
 	}
 
@@ -24,62 +24,54 @@ public class GPSComputer {
 	}
 	
 	public GPSPoint[] getGPSPoints() {
-		return this.gpspoints;
+		return gpspoints;
 	}
 	
 	public double totalDistance() {
-
 		double distance = 0;
-
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO
-
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+			distance += GPSUtils.distance(gpspoints[i], gpspoints[i + 1]);
+		}
+		return distance;
 	}
 
 	public double totalElevation() {
-
 		double elevation = 0;
-
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO 
-		
+		for (int i = 1; i < gpspoints.length; i++) {
+			double diff = gpspoints[i].getElevation() - gpspoints[i - 1].getElevation();
+			if (diff > 0) {
+				elevation += diff;
+			}
+		}
+		return elevation;
 	}
 
 	public int totalTime() {
-
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
-		
+		int time = 0;
+		for (int i = 1; i < gpspoints.length; i++) {
+			time += gpspoints[i].getTime() - gpspoints[i - 1].getTime();
+		}
+		return time;
 	}
 		
 
 	public double[] speeds() {
-
 		double[] speeds = new double[gpspoints.length-1];
-		
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
-		
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+			speeds[i] = GPSUtils.speed(gpspoints[i], gpspoints[i + 1]);
+		}
+		return speeds;
 	}
 	
 	public double maxSpeed() {
-		
-		double maxspeed = 0;
-		
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
-	
+		double[] speeds = speeds();
+		return GPSUtils.findMax(speeds);
 	}
 
 	public double averageSpeed() {
-
-		double average = 0;
-		
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
-		
+		double totalDistance = totalDistance();
+		double totalTime = totalTime();
+		return totalDistance / totalTime;
 	}
 
 
