@@ -74,7 +74,7 @@ public class GPSComputer {
 		return totalDistance / totalTime;
 	}
 
-
+	// Torgeir
 	// conversion factor m/s to miles per hour (mps)
 	public static final double MS = 2.23;
 
@@ -89,7 +89,8 @@ public class GPSComputer {
 		throw new UnsupportedOperationException(TODO.method());
 		
 	}
-
+	
+	// Torgeir
 	public double totalKcal(double weight) {
 
 		double totalkcal = 0;
@@ -99,6 +100,7 @@ public class GPSComputer {
 		
 	}
 	
+	// Torgeir
 	private static double WEIGHT = 80.0;
 	
 	public void displayStatistics() {
