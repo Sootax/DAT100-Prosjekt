@@ -45,12 +45,44 @@ public class ShowProfile extends EasyGraphics {
 	public void showHeightProfile(int ybase) {
 		
 		int x = MARGIN; // første høyde skal tegnes ved MARGIN
-		int y;
 		
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
+		int maxElevation = 0;
+		int pointsCount = gpspoints.length;
 		
-
+		// Finner høyeste punkt for å justere grafikkvindu		
+		for ( GPSPoint point : gpspoints ) {
+			if (point.getElevation() > maxElevation) {
+				maxElevation = (int) point.getElevation();
+			}
+		}
+			
+		// Angir str på grafikkvindu basert på høyeste punkt og antall punkt.
+		
+		int windowX = pointsCount * 2 + MARGIN * 2;
+		int windowY = maxElevation + MARGIN * 2;
+		
+		makeWindow("Grafikk", windowX, windowY);
+		
+		
+		// Justerer ybase så det ikke blir mye tomrom over høydeprofilen
+		ybase = maxElevation + MARGIN;
+		
+		// Tegner hver høyde i grafikk vinduet
+		for (int i = 0; i < gpspoints.length; i++) {
+		
+			int y = (int) gpspoints[i].getElevation();
+			
+			// Håndterer negative verdier
+			if (y < 0) { 
+				y = 0;
+			}				
+			
+			drawLine(x, ybase, x, ybase - y);
+			
+			x += 2;
+			
+		}
+		
 	}
 
 }
