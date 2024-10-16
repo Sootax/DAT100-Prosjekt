@@ -6,8 +6,8 @@ import no.hvl.dat100ptc.oppgave2.GPSDataFileReader;
 import no.hvl.dat100ptc.oppgave3.GPSUtils;
 
 public class GPSComputer {
-	
 	private GPSPoint[] gpspoints;
+	public String[] statistics;
 	
 	public GPSComputer(String filename) {
 
@@ -130,27 +130,20 @@ public class GPSComputer {
 	
 	private static double WEIGHT = 80.0;
 	private static String BORDER = "=".repeat(35);
-	
-	public void displayStatistics() {
-		
-		String secToHours = GPSUtils.formatTime(totalTime());
-		String totDistInKm = String.format("%.2f", totalDistance() / 1000) + " km";
-		String totElevation = String.format("%.2f", totalElevation()) + " m";
-		String maxSpeedInKMH = String.format("%.2f", maxSpeed() * 3.6) + " km/t";
-		String avgSpeedInKMH = String.format("%.2f", averageSpeed() * 3.6) + " km/t";
-		String energy = String.format("%.2f", totalKcal(WEIGHT)) + " kcal";
-		
-		
-		System.out.println(BORDER);
-		System.out.println("Total Time     :" + secToHours);
-		System.out.println("Total Distance :  " + totDistInKm);
-		System.out.println("Total Elevation:  " + totElevation);
-		System.out.println("Max Speed      :  " + maxSpeedInKMH);
-		System.out.println("Average Speed  :  " + avgSpeedInKMH);
-		System.out.println("Energy         :  " + energy);
-		System.out.println(BORDER);
-		System.out.println();
-	
-	}
 
+	public void displayStatistics() {
+		this.statistics = new String[]{
+				BORDER,
+				String.format("Total Time     : %s", GPSUtils.formatTime(totalTime())),
+				String.format("Total Distance : %7s km", String.format("%.2f", totalDistance() / 1000)),
+				String.format("Total Elevation: %7s m", String.format("%.2f", totalElevation())),
+				String.format("Max Speed      : %7s km/t", String.format("%.2f", maxSpeed() * 3.6)),
+				String.format("Average Speed  : %7s km/t", String.format("%.2f", averageSpeed() * 3.6)),
+				String.format("Energy         : %7s kcal", String.format("%.2f", totalKcal(WEIGHT))),
+				BORDER
+		};
+		for (int i = 0; i < statistics.length; i++) {
+			System.out.println(statistics[i]);
+		}
+	}
 }
