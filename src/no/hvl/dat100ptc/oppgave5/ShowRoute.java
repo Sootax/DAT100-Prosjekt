@@ -50,7 +50,7 @@ public class ShowRoute extends EasyGraphics {
 		
 		showRouteMap(MARGIN + MAPYSIZE);
 
-		replayRoute(MARGIN + MAPYSIZE);
+		// replayRoute(MARGIN + MAPYSIZE);
 		
 		showStatistics();
 	}
@@ -63,10 +63,24 @@ public class ShowRoute extends EasyGraphics {
 	}
 
 	public void showRouteMap(int ybase) {
+		setColor(0, 0, 255);
+		int radius = 2;
 
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
-		
+		GPSPoint[] gpspoints = gpscomputer.getGPSPoints();
+		int xPrev = MARGIN + (int)((gpspoints[0].getLongitude() - minlon) * xstep);
+		int yPrev = MARGIN + (int)((maxlat - gpspoints[0].getLatitude()) * ystep);
+
+		for (int i = 0; i < gpspoints.length; i++) {
+			int x = MARGIN + (int)((gpspoints[i].getLongitude() - minlon) * xstep);
+			int y = MARGIN + (int)((maxlat - gpspoints[i].getLatitude()) * ystep);
+
+			if (i > 0) {
+				drawLine(xPrev, yPrev, x, y);
+			}
+			fillCircle(x, y, radius);
+			xPrev = x;
+			yPrev = y;
+		}
 	}
 
 	public void showStatistics() {
@@ -75,9 +89,15 @@ public class ShowRoute extends EasyGraphics {
 
 		setColor(0,0,0);
 		setFont("Courier",12);
+
+		int totalTime = gpscomputer.totalTime();
+		int hours = totalTime / 3600;
+		int minutes = totalTime % 3600 / 60;
+		int seconds = totalTime % 60;
+		String timeStr = hours + ":" + minutes + ":" + seconds;
+
 		
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
+		drawString("Total Time: " + timeStr, 10, 10);
 		
 	}
 
