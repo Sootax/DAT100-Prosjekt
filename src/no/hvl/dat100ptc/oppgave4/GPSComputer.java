@@ -23,6 +23,25 @@ public class GPSComputer {
 	public GPSPoint[] getGPSPoints() {
 		return gpspoints;
 	}
+
+	public double[] climbs() {
+		double[] climbs = new double[gpspoints.length - 1];
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+			double distance = GPSUtils.distance(gpspoints[i], gpspoints[i + 1]);
+			if (distance < 1e-6) {
+				climbs[i] = 0;
+				continue;
+			}
+			double elevation = GPSUtils.elevation(gpspoints[i], gpspoints[i + 1]);
+			double slope = (elevation / distance) * 100;
+			climbs[i] = slope;
+		}
+		return climbs;
+	}
+
+	public double maxClimb() {
+		return GPSUtils.findMax(climbs());
+	}
 	
 	public double totalDistance() {
 		double distance = 0;
@@ -142,8 +161,8 @@ public class GPSComputer {
 				String.format("Energy         : %7s kcal", String.format("%.2f", totalKcal(WEIGHT))),
 				BORDER
 		};
-		for (int i = 0; i < statistics.length; i++) {
-			System.out.println(statistics[i]);
-		}
+        for (String statistic : statistics) {
+            System.out.println(statistic);
+        }
 	}
 }

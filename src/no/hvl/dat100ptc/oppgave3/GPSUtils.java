@@ -69,6 +69,10 @@ public class GPSUtils {
 	
 	private static final int R = 6371000; // jordens radius
 
+	public static double elevation(GPSPoint gpspoint1, GPSPoint gpspoint2) {
+		return gpspoint2.getElevation() - gpspoint1.getElevation();
+	}
+
 	public static double distance(GPSPoint gpspoint1, GPSPoint gpspoint2) {
 
 		double d;
