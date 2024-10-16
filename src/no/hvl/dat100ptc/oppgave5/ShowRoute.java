@@ -68,16 +68,15 @@ public class ShowRoute extends EasyGraphics {
 
 		GPSPoint[] gpspoints = gpscomputer.getGPSPoints();
 		int xPrev = MARGIN + (int)((gpspoints[0].getLongitude() - minlon) * xstep);
-		int yPrev = MARGIN + (int)((maxlat - gpspoints[0].getLatitude()) * ystep);
+		int yPrev = ybase - (int)((gpspoints[0].getLatitude() - minlat) * ystep);
 
-		for (int i = 0; i < gpspoints.length; i++) {
+		for (int i = 1; i < gpspoints.length; i++) {
 			int x = MARGIN + (int)((gpspoints[i].getLongitude() - minlon) * xstep);
-			int y = MARGIN + (int)((maxlat - gpspoints[i].getLatitude()) * ystep);
+			int y = ybase - (int)((gpspoints[i].getLatitude() - minlat) * ystep);
 
-			if (i > 0) {
-				drawLine(xPrev, yPrev, x, y);
-			}
+			drawLine(xPrev, yPrev, x, y);
 			fillCircle(x, y, radius);
+
 			xPrev = x;
 			yPrev = y;
 		}
