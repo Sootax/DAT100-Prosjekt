@@ -63,8 +63,8 @@ public class ShowRoute extends EasyGraphics {
 	}
 
 	public void showRouteMap(int ybase) {
-		setColor(0, 0, 255);
-		int radius = 2;
+		setColor(0, 255, 0);
+		int radius = 3;
 
 		GPSPoint[] gpspoints = gpscomputer.getGPSPoints();
 		int xPrev = MARGIN + (int)((gpspoints[0].getLongitude() - minlon) * xstep);
@@ -84,21 +84,24 @@ public class ShowRoute extends EasyGraphics {
 	}
 
 	public void showStatistics() {
+		setColor(0, 0, 0);
+		gpscomputer.displayStatistics();
+		String[] statistics = gpscomputer.statistics;
 
-		int TEXTDISTANCE = 20;
+		int labelX = 10;
+		int colonX = 120;
+		int valueX = 150;
+		int startY = 10;
+		int lineHeight = 20;
 
-		setColor(0,0,0);
-		setFont("Courier",12);
-
-		int totalTime = gpscomputer.totalTime();
-		int hours = totalTime / 3600;
-		int minutes = totalTime % 3600 / 60;
-		int seconds = totalTime % 60;
-		String timeStr = hours + ":" + minutes + ":" + seconds;
-
-		
-		drawString("Total Time: " + timeStr, 10, 10);
-		
+		for (int i = 1; i < statistics.length - 1; i++) {
+			String[] parts = statistics[i].split(":\\s+");
+			drawString(parts[0], labelX, startY + i * lineHeight);
+			drawString(":", colonX, startY + i * lineHeight);
+			if (parts.length > 1) {
+				drawString(parts[1], valueX, startY + i * lineHeight);
+			}
+		}
 	}
 
 	public void replayRoute(int ybase) {
