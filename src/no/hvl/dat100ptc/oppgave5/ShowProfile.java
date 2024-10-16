@@ -47,25 +47,14 @@ public class ShowProfile extends EasyGraphics {
 		int x = MARGIN; // første høyde skal tegnes ved MARGIN
 		
 		int maxElevation = 0;
-		int pointsCount = gpspoints.length;
 		
-		// Finner høyeste punkt for å justere grafikkvindu		
 		for ( GPSPoint point : gpspoints ) {
 			if (point.getElevation() > maxElevation) {
 				maxElevation = (int) point.getElevation();
 			}
 		}
-			
-		// Angir str på grafikkvindu basert på høyeste punkt og antall punkt.
 		
-		int windowX = pointsCount * 2 + MARGIN * 2;
-		int windowY = maxElevation + MARGIN * 2;
-		
-		makeWindow("Grafikk", windowX, windowY);
-		
-		
-		// Justerer ybase så det ikke blir mye tomrom over høydeprofilen
-		ybase = maxElevation + MARGIN;
+		setColor(0, 0, 255);
 		
 		// Tegner hver høyde i grafikk vinduet
 		for (int i = 0; i < gpspoints.length; i++) {
@@ -82,6 +71,14 @@ public class ShowProfile extends EasyGraphics {
 			x += 2;
 			
 		}
+		
+		// Tegner rektangel
+		int xPos = MARGIN - 10;
+		int yPos = ybase - (maxElevation + MARGIN - 20);
+		int bredde = 2 * MARGIN + 2 * gpspoints.length - 80;
+		int høyde = 2 * MARGIN + maxElevation - 60;
+		
+		drawRectangle(xPos, yPos, bredde, høyde);
 		
 	}
 
