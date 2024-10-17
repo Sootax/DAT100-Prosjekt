@@ -42,44 +42,33 @@ public class ShowProfile extends EasyGraphics {
 		showHeightProfile(MARGIN + MAXBARHEIGHT); 
 	}
 
-	public void showHeightProfile(int ybase) {
-		
-		int x = MARGIN; // første høyde skal tegnes ved MARGIN
-		
+	public int maxElevation() {
 		int maxElevation = 0;
-		
-		for ( GPSPoint point : gpspoints ) {
-			if (point.getElevation() > maxElevation) {
-				maxElevation = (int) point.getElevation();
+		for (GPSPoint gpspoint : gpspoints) {
+			if (gpspoint.getElevation() > maxElevation) {
+				maxElevation = (int) gpspoint.getElevation();
 			}
 		}
-		
+		return maxElevation;
+	}
+
+	public void showHeightProfile(int ybase) {
+		int x = MARGIN; // første høyde skal tegnes ved MARGIN
+		double speed =  1 / Double.parseDouble(getText("Hastighet: "));
+		int maxElevation = maxElevation();
 		setColor(0, 0, 255);
-		
-		// Tegner hver høyde i grafikk vinduet
-		for (int i = 0; i < gpspoints.length; i++) {
-		
+
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+			double timeDiff = gpspoints[i + 1].getTime() - gpspoints[i].getTime();
 			int y = (int) gpspoints[i].getElevation();
-			
-			// Håndterer negative verdier
-			if (y < 0) { 
+			if (y < 0) {
 				y = 0;
-			}				
-			
+			}
 			drawLine(x, ybase, x, ybase - y);
-			
-			x += 2;
-			
+			double test = (speed * timeDiff) * 1000;
+			pause((int)test);
+			x+=2;
 		}
-		
-		// Tegner rektangel
-		int xPos = MARGIN - 10;
-		int yPos = ybase - (maxElevation + MARGIN - 20);
-		int bredde = 2 * MARGIN + 2 * gpspoints.length - 80;
-		int høyde = 2 * MARGIN + maxElevation - 60;
-		
-		drawRectangle(xPos, yPos, bredde, høyde);
-		
 	}
 
 }
