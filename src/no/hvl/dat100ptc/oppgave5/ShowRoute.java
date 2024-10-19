@@ -104,28 +104,47 @@ public class ShowRoute extends EasyGraphics {
 	}
 
 	public void replayRoute(int ybase) {
-
 		
-
 		GPSPoint[] gpspoints = gpscomputer.getGPSPoints();
 		int xPrev = MARGIN + (int)((gpspoints[0].getLongitude() - minlon) * xstep);
 		int yPrev = ybase - (int)((gpspoints[0].getLatitude() - minlat) * ystep);
 		
+		double[] speeds = gpscomputer.speeds();
+		
+		double maxSpeed = 0;
+		int speed = 1;
+		int j = 0;
+		
+		for (int i = 0; i < speeds.length; i++) {
+			if (speeds[i] > maxSpeed) {
+				maxSpeed = speeds[i];
+			}
+		}
+		
 		int radius = 5;
 		setColor(0, 0, 255);
 		int nodeId = fillCircle(xPrev, yPrev, radius);
-		
-		setSpeed(10);
 		
 		for (int i = 0; i < gpspoints.length; i++) {
 			
 			int x = MARGIN + (int)((gpspoints[i].getLongitude() - minlon) * xstep);
 			int y = ybase - (int)((gpspoints[i].getLatitude() - minlat) * ystep);
 			
+			// Plasserer farten i bøtter 1-10 for å justere setSpeed()
+			if (i > 0) {
+				j = i-1;
+				speed = (int) Math.round((speeds[j] / maxSpeed) * 9) + 1; 
+			}
+			
+			setSpeed(speed);
+			
 			setColor(0, 0, 255);
-			moveCircle(nodeId, x, y);	
-			pause(50);
-		}
+			moveCircle(nodeId, x, y);
+			pause(60);
 
+		}
+		
 	}
 }
+
+
